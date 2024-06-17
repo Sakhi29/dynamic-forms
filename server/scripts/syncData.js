@@ -1,13 +1,9 @@
 const fs = require("fs");
 const { google } = require("googleapis");
 const path = require("path");
-const axios = require("axios"); 
+const axios = require("axios");
 
-
-const credentialsPath = path.join(
-  __dirname,
-  "../config/service-account.json"
-);
+const credentialsPath = path.join(__dirname, "../config/service-account.json");
 const credentials = JSON.parse(fs.readFileSync(credentialsPath));
 
 async function authorize() {
@@ -22,8 +18,8 @@ async function syncData() {
   const auth = await authorize();
   const sheets = google.sheets({ version: "v4", auth });
 
-  const SPREADSHEET_ID = "120HxtUxtLBBBPywOWlEtbXL7nf11dZ-USS8bJT4jj5Y"; 
-  const range = "Sheet1!A1"; 
+  const SPREADSHEET_ID = process.env.ID;
+  const range = "Sheet1!A1";
 
   let rows;
   try {
